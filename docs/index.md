@@ -3,8 +3,8 @@
 layout: home
 
 hero:
-  name: "Solutions-GMyhf"
-  text: "cs101.openjudge 和 codeforces的题解"
+  name: "Solutions FuYnAloft"
+  text: "openjudge 和 codeforces的题解"
   tagline: 请点击下面的按钮进入
   actions:
     - theme: brand

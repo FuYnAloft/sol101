@@ -24,7 +24,7 @@ export default defineConfig({
         ],
 
         socialLinks: [
-            {icon: 'github', link: 'https://github.com/GMyhf/2020fall-cs101/tree/main'}
+            {icon: 'github', link: 'https://github.com/FuYnAloft/sol101'}
         ],
 
         sidebar: {
@@ -564,8 +564,7 @@ export default defineConfig({
         },
 
         footer: {
-            message: 'Released under the MIT License.',
-            copyright: '原版文档的<a href=https://github.com/GMyhf/2020fall-cs101/tree/main>github页面</a>'
+            message: '仓库地址：<a href=https://github.com/FuYnAloft/sol101>FuYnAloft/sol101</a>',
         },
 
         search: {
