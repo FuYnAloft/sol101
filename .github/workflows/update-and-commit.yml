@@ -1,0 +1,54 @@
+name: Auto Update, Split and Commit
+
+on:
+  schedule:
+    # Run daily at 00:00 UTC
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run update.py
+        id: update
+        run: |
+          output=$(python update.py)
+          echo "$output"
+          last_line=$(echo "$output" | tail -n 1)
+          echo "updated=$last_line" >> $GITHUB_OUTPUT
+
+      - name: Run split.py
+        if: steps.update.outputs.updated == 'true'
+        run: python split.py
+
+      - name: Commit and push changes
+        if: steps.update.outputs.updated == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add -A
+          git diff --staged --quiet || git commit -m "Auto update: $(date +'%Y-%m-%d %H:%M:%S')"
+          git push
+
+      - name: Mark as neutral if no update
+        if: steps.update.outputs.updated != 'true'
+        run: |
+          echo "No updates found, marking workflow as neutral"
+          exit 0
