@@ -37,7 +37,7 @@ export default defineConfig({
         },
 
         footer: {
-            message: '仓库地址：<a href=https://github.com/FuYnAloft/sol101>FuYnAloft/sol101</a>',
+            message: '仓库地址：<a href=https://github.com/FuYnAloft/sol101>https://github.com/FuYnAloft/sol101</a>',
         },
 
         search: {
