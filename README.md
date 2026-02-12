@@ -56,7 +56,7 @@ npm run docs:dev
 
 本项目通过 GitHub Actions 自动更新题解内容：
 
-1. **自动更新**：每天 UTC 时间 00:00 自动运行更新流程
+1. **自动更新**：每天 UTC 00:00 自动运行更新流程
 2. **update.py**：从上游仓库检查并下载最新的题解文件
    - 使用 ETag 检测文件变化
    - 下载的文件保存到 `original/` 目录
@@ -77,9 +77,9 @@ npm run docs:dev
 欢迎贡献！如果你发现问题或有改进建议，请：
 
 1. Fork 本仓库
-2. 创建你的特性分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交你的修改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
+2. 创建你的特性分支 (`git checkout -b feature/amazing-feature`)
+3. 提交你的修改 (`git commit -m 'Add some amazing feature'`)
+4. 推送到分支 (`git push origin feature/amazing-feature`)
 5. 开启一个 Pull Request
 
 **注意**：题解内容来源于上游仓库，如需修改题解内容，请前往 [GMyhf/2020fall-cs101](https://github.com/GMyhf/2020fall-cs101) 提交修改。
