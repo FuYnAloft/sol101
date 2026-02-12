@@ -559,12 +559,12 @@ export default defineConfig({
         },
 
         outline: {
-            level: [1, 6],
-            label: '目录'
+            level: [2, 6],
+            label: '大纲'
         },
 
         footer: {
-            message: '仓库地址：<a href=https://github.com/FuYnAloft/sol101>FuYnAloft/sol101</a>',
+            message: '仓库地址：<a href=https://github.com/FuYnAloft/sol101>https://github.com/FuYnAloft/sol101</a>',
         },
 
         search: {
