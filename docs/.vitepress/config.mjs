@@ -559,8 +559,8 @@ export default defineConfig({
         },
 
         outline: {
-            level: [1, 6],
-            label: '目录'
+            level: [2, 6],
+            label: '大纲'
         },
 
         footer: {
