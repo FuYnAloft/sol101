@@ -26,11 +26,11 @@ ANSWERS = [
     Answer(
         name="cf",
         url="https://raw.githubusercontent.com/GMyhf/2020fall-cs101/refs/heads/main/2020fall_Codeforces_problems.md",
-        fullname="CodeForces",
-        title="CodeForces的题解",
+        fullname="Codeforces",
+        title="Codeforces的题解",
         details="codeforces.com的题解",
         icon="/icon-cf.png",
         action_theme="alt",
-        welcome="欢迎来到CodeForces题库",
+        welcome="欢迎来到Codeforces题库",
     ),
 ]
