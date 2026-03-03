@@ -397,7 +397,7 @@ def generate_nav_config(answers) -> str:
 
 def generate_index_md(answers) -> str:
     """
-    Generate docs/index.md content from Answer objects.
+    Generate docs/index.md content by reading index.templ.md and replacing placeholders.
 
     Args:
         answers: List of Answer objects
@@ -405,35 +405,32 @@ def generate_index_md(answers) -> str:
     Returns:
         Markdown frontmatter string for index.md
     """
-    # Build hero text from fullnames
-    fullnames = [a.fullname for a in answers]
-    if len(fullnames) == 1:
-        hero_text = f"{fullnames[0]}的题解"
-    else:
-        hero_text = "、".join(fullnames[:-1]) + " 和 " + fullnames[-1] + "的题解"
+    with open('index.templ.md', 'r', encoding='utf-8') as f:
+        template = f.read()
 
-    content = '---\n'
-    content += '# https://vitepress.dev/reference/default-theme-home-page\n'
-    content += 'layout: home\n'
-    content += '\n'
-    content += 'hero:\n'
-    content += '  name: "Solutions FuYnAloft"\n'
-    content += f'  text: "{hero_text}"\n'
-    content += '  tagline: 请点击下面的按钮进入\n'
-    content += '  actions:\n'
+    # Generate actions content
+    actions_lines = []
     for a in answers:
-        content += f'    - theme: {a.action_theme}\n'
-        content += f'      text: {a.fullname}\n'
-        content += f'      link: /{a.name}\n'
-    content += 'features:\n'
+        actions_lines.append(f'    - theme: {a.action_theme}')
+        actions_lines.append(f'      text: {a.fullname}')
+        actions_lines.append(f'      link: /{a.name}')
+    actions_content = '\n'.join(actions_lines)
+
+    # Generate features content
+    features_lines = []
     for a in answers:
-        content += '  - icon:\n'
-        content += f'      src: {a.icon}\n'
-        content += f'    title: {a.title}\n'
-        content += f'    details: {a.details}\n'
-        content += f'    link: /{a.name}\n'
-    content += '---\n'
-    return content
+        features_lines.append('  - icon:')
+        features_lines.append(f'      src: {a.icon}')
+        features_lines.append(f'    title: {a.title}')
+        features_lines.append(f'    details: {a.details}')
+        features_lines.append(f'    link: /{a.name}')
+    features_content = '\n'.join(features_lines)
+
+    return template.replace(
+        '    # template: actions', actions_content
+    ).replace(
+        '  # template: features', features_content
+    )
 
 
 def update_config_file(sidebar_config: str, nav_config: str):
