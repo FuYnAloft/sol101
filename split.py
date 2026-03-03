@@ -379,21 +379,82 @@ def generate_sidebar_config(structures: dict) -> str:
     return ",\n        ".join(sidebar_parts)
 
 
-def update_config_file(sidebar_config: str):
+def generate_nav_config(answers) -> str:
     """
-    Update the config.mjs file with the generated sidebar configuration.
-    
+    Generate VitePress nav configuration from Answer objects.
+
+    Args:
+        answers: Iterable of Answer objects
+
+    Returns:
+        JavaScript nav items string
+    """
+    nav_items = []
+    for answer in answers:
+        nav_items.append(f"{{text: '{answer.fullname}', link: '/{answer.name}.md'}}")
+    return ",\n            ".join(nav_items)
+
+
+def generate_index_md(answers) -> str:
+    """
+    Generate docs/index.md content from Answer objects.
+
+    Args:
+        answers: List of Answer objects
+
+    Returns:
+        Markdown frontmatter string for index.md
+    """
+    # Build hero text from fullnames
+    fullnames = [a.fullname for a in answers]
+    if len(fullnames) == 1:
+        hero_text = f"{fullnames[0]}的题解"
+    else:
+        hero_text = "、".join(fullnames[:-1]) + " 和 " + fullnames[-1] + "的题解"
+
+    content = '---\n'
+    content += '# https://vitepress.dev/reference/default-theme-home-page\n'
+    content += 'layout: home\n'
+    content += '\n'
+    content += 'hero:\n'
+    content += '  name: "Solutions FuYnAloft"\n'
+    content += f'  text: "{hero_text}"\n'
+    content += '  tagline: 请点击下面的按钮进入\n'
+    content += '  actions:\n'
+    for a in answers:
+        content += f'    - theme: {a.action_theme}\n'
+        content += f'      text: {a.fullname}\n'
+        content += f'      link: /{a.name}\n'
+    content += 'features:\n'
+    for a in answers:
+        content += '  - icon:\n'
+        content += f'      src: {a.icon}\n'
+        content += f'    title: {a.title}\n'
+        content += f'    details: {a.details}\n'
+        content += f'    link: /{a.name}\n'
+    content += '---\n'
+    return content
+
+
+def update_config_file(sidebar_config: str, nav_config: str):
+    """
+    Update the config.mjs file with the generated sidebar and nav configuration.
+
     Args:
         sidebar_config: JavaScript sidebar configuration string
+        nav_config: JavaScript nav items string
     """
     # Read the template
     with open('config.templ.mjs', 'r', encoding='utf-8') as f:
         template = f.read()
 
-    # Replace the sidebar placeholder
+    # Replace the placeholders
     updated_config = template.replace(
         '// template: sidebar',
         sidebar_config
+    ).replace(
+        '// template: nav',
+        nav_config
     )
 
     # Write to the actual config file
@@ -401,16 +462,19 @@ def update_config_file(sidebar_config: str):
         f.write(updated_config)
 
 
-def split(names: Iterable[str]):
+def split(answers):
     """
     Main function to cut markdown files into smaller pieces.
     
     Args:
-        names: Set of document names to process (e.g., {'cf', 'oj'})
+        answers: Iterable of Answer objects to process
     """
     all_structures = {}
+    answers_list = list(answers)
 
-    for name in names:
+    for answer in answers_list:
+        name = answer.name
+
         # Validate name to prevent path traversal
         if not re.match(r'^[a-zA-Z0-9_-]+$', name):
             print(
@@ -448,30 +512,30 @@ def split(names: Iterable[str]):
         base_dir = Path(f'docs/{name}')
         index_path = base_dir / 'index.md'
 
-        # Determine the name for the guide page
-        if name == 'oj':
-            title = 'OpenJudge题库'
-        elif name == 'cf':
-            title = 'Codeforces题库'
-        else:
-            title = f'{name.upper()}题库'
-
-        guide_content = f"# {title}\n\n欢迎来到{title}，点击左边目录选择题目。\n"
+        guide_content = f"# {answer.fullname}题库\n\n{answer.welcome}，点击左边目录选择题目。\n"
 
         with open(index_path, 'w', encoding='utf-8') as f:
             f.write(guide_content)
         print(f"  Created index.md (guide page)")
 
-    # Generate and update sidebar configuration
+    # Generate and update sidebar and nav configuration
     if all_structures:
         print("Generating sidebar configuration...")
         sidebar_config = generate_sidebar_config(all_structures)
-        update_config_file(sidebar_config)
+        nav_config = generate_nav_config(answers_list)
+        update_config_file(sidebar_config, nav_config)
         print("Updated docs/.vitepress/config.mjs")
+
+    # Generate docs/index.md
+    print("Generating docs/index.md...")
+    index_content = generate_index_md(answers_list)
+    with open('docs/index.md', 'w', encoding='utf-8') as f:
+        f.write(index_content)
+    print("Updated docs/index.md")
 
     print("Done!")
 
 
 if __name__ == "__main__":
     from config import ANSWERS
-    split(answer.name for answer in ANSWERS)
+    split(ANSWERS)
