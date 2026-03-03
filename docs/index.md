@@ -4,14 +4,14 @@ layout: home
 
 hero:
   name: "Solutions FuYnAloft"
-  text: "openjudge 和 codeforces的题解"
+  text: "OpenJudge 和 Codeforces的题解"
   tagline: 请点击下面的按钮进入
   actions:
     - theme: brand
       text: OpenJudge
       link: /oj
     - theme: alt
-      text: CodeForces
+      text: Codeforces
       link: /cf
 features:
   - icon:
@@ -21,7 +21,7 @@ features:
     link: /oj
   - icon:
       src: /icon-cf.png
-    title: CodeForces的题解
+    title: Codeforces的题解
     details: codeforces.com的题解
     link: /cf
 ---
