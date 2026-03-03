@@ -10,7 +10,7 @@ on:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -48,12 +48,14 @@ jobs:
         run: zip -r latest.zip docs/.vitepress/dist/*
 
       - name: Upload latest.zip to GitHub Releases
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: latest
           name: latest
           files: latest.zip
-          overwrite: true
+          make_latest: true
+          allowUpdates: true
+          replacesArtifacts: true
 
   deploy:
     environment:
