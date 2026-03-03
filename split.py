@@ -405,7 +405,12 @@ def generate_index_md(answers) -> str:
     Returns:
         Markdown frontmatter string for index.md
     """
-    with open('index.templ.md', 'r', encoding='utf-8') as f:
+    # Read the template
+    template_path = 'index.templ.md'
+    if not os.path.exists(template_path):
+        raise FileNotFoundError(f"{template_path} not found. This template is required to generate docs/index.md.")
+
+    with open(template_path, 'r', encoding='utf-8') as f:
         template = f.read()
 
     # Generate actions content
