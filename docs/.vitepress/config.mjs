@@ -19,7 +19,7 @@ export default defineConfig({
         // https://vitepress.dev/reference/default-theme-config
         nav: [
             {text: 'Home', link: '/'},
-            {text: 'Openjudge', link: '/oj.md'},
+            {text: 'OpenJudge', link: '/oj.md'},
             {text: 'Codeforces', link: '/cf.md'}
         ],
 
