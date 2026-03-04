@@ -16,20 +16,44 @@ hero:
     - theme: alt
       text: Codeforces
       link: /cf/
+    - theme: alt
+      text: LeetCode - 易+中
+      link: /leetcode-em/
+    - theme: alt
+      text: LeetCode - 难
+      link: /leetcode-tough/
+    - theme: alt
+      text: Sunnywhy
+      link: /sunnywhy/
 features:
   - icon:
       src: /icon-oj.jpg
     title: OpenJudge 数算题解
-    details: cs101.openjudge.cn 数算部分的题解
+    details: cs101.openjudge.cn 数算部分题解
     link: /oj-dsa/
   - icon:
       src: /icon-oj.jpg
     title: OpenJudge 计概题解
-    details: cs101.openjudge.cn 计概部分的题解
+    details: cs101.openjudge.cn 计概部分题解
     link: /oj/
   - icon:
       src: /icon-cf.png
     title: Codeforces 题解
-    details: codeforces.com的题解
+    details: codeforces.com 题解
     link: /cf/
+  - icon:
+      src: /icon-leetcode.svg
+    title: LeetCode 易+中 题解
+    details: LeetCode 简单+中等难度题解
+    link: /leetcode-em/
+  - icon:
+      src: /icon-leetcode.svg
+    title: LeetCode 困难题题解
+    details: LeetCode 困难题题解
+    link: /leetcode-tough/
+  - icon:
+      src: /icon-sunnywhy.jpg
+    title: Sunnywhy 题解
+    details: sunnywhy.com 题解
+    link: /sunnywhy/
 ---
