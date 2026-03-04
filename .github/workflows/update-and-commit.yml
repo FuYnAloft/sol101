@@ -17,6 +17,7 @@ on:
         default: false
 
 permissions:
+  actions: write
   contents: write
 
 jobs:
@@ -75,3 +76,9 @@ jobs:
           git add -A
           git diff --staged --quiet || git commit -m "Auto update: $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
           git push
+
+      - name: Trigger build-and-deploy workflow
+        if: steps.update.outputs.updated == 'true'
+        uses: peter-evans/workflow-dispatch@v1
+        with:
+          workflow: build-and-deploy.yml
