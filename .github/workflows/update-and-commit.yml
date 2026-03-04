@@ -79,6 +79,6 @@ jobs:
 
       - name: Trigger build-and-deploy workflow
         if: steps.update.outputs.updated == 'true'
-        uses: peter-evans/workflow-dispatch@v1
+        uses: benc-uk/workflow-dispatch@v1
         with:
           workflow: build-and-deploy.yml
