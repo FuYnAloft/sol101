@@ -514,7 +514,7 @@ def split(answers):
         base_dir = Path(f'docs/{name}')
         index_path = base_dir / 'index.md'
 
-        guide_content = f"# {answer.fullname}题库\n\n{answer.welcome}，点击左边目录选择题目。\n"
+        guide_content = f"# {answer.fullname}题库\n\n{answer.welcome}\n"
 
         with open(index_path, 'w', encoding='utf-8') as f:
             f.write(guide_content)
