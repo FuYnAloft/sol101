@@ -44,18 +44,11 @@ jobs:
         with:
           path: docs/.vitepress/dist
 
-      - name: Zip build artifact
-        run: zip -r latest.zip docs/.vitepress/dist/*
-
-      - name: Upload latest.zip to GitHub Releases
-        uses: softprops/action-gh-release@v2
+      - name: Upload site dist to workflow artifacts
+        uses: actions/upload-artifact@v4
         with:
-          tag_name: latest
-          name: latest
-          files: latest.zip
-          make_latest: true
-          allowUpdates: true
-          replacesArtifacts: true
+          name: site-dist
+          path: docs/.vitepress/dist
 
   deploy:
     environment:
