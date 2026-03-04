@@ -27,32 +27,34 @@ hero:
       link: /sunnywhy/
 features:
   - icon:
-      src: /icon-oj.jpg
+      src: /icons/oj.jpg
     title: OpenJudge 数算题解
     details: cs101.openjudge.cn 数算部分题解
     link: /oj-dsa/
   - icon:
-      src: /icon-oj.jpg
+      src: /icons/oj.jpg
     title: OpenJudge 计概题解
     details: cs101.openjudge.cn 计概部分题解
     link: /oj/
   - icon:
-      src: /icon-cf.png
+      src: /icons/cf.png
     title: Codeforces 题解
     details: codeforces.com 题解
     link: /cf/
   - icon:
-      src: /icon-leetcode.svg
+      light: /icons/leetcode-light.svg
+      dark: /icons/leetcode-dark.svg
     title: LeetCode 易+中 题解
     details: LeetCode 简单+中等难度题解
     link: /leetcode-em/
   - icon:
-      src: /icon-leetcode.svg
+      light: /icons/leetcode-light.svg
+      dark: /icons/leetcode-dark.svg
     title: LeetCode 困难题题解
     details: LeetCode 困难题题解
     link: /leetcode-tough/
   - icon:
-      src: /icon-sunnywhy.jpg
+      src: /icons/sunnywhy.jpg
     title: Sunnywhy 题解
     details: sunnywhy.com 题解
     link: /sunnywhy/
