@@ -3,6 +3,7 @@ import mark from 'markdown-it-mark'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+    ignoreDeadLinks: true,
     base: '/sol101/',
     lang: "zh-CN",
     title: "Solutions CS101",

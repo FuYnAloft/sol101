@@ -22,6 +22,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      NODE_OPTIONS: --max-old-space-size=8192 # Increase memory limit for Node.js to prevent out-of-memory errors during build
     
     steps:
       - name: Checkout repository
