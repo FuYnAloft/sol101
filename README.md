@@ -3,7 +3,7 @@
 **网站地址**: https://fuynaloft.github.io/sol101/
 
 这是一个算法题目题解网站，题目来源于 [openjudge](http://cs101.openjudge.cn) 和 [codeforces](https://codeforces.com/)，
-题解来源于 [GMyhf/2020fall-cs101](https://github.com/GMyhf/2020fall-cs101)。
+题解来源于 [GMyhf/2020fall-cs101](https://github.com/GMyhf/2020fall-cs101) 和 [GMyhf/2024spring-cs201](https://github.com/GMyhf/2024spring-cs201)。
 本项目将原版的长 Markdown 文件拆分成独立的题解文件，并使用 VitePress 构建成方便阅读的网站，同时使用 GitHub Actions 实现自动更新和构建。
 
 ## 本地构建
@@ -60,11 +60,11 @@
 3. 创建你的特性分支，提交修改并推送到你的 Fork
 4. 开启一个 Pull Request
 
-**注意**：题解内容来源于上游仓库，如需修改题解内容，请前往 [GMyhf/2020fall-cs101](https://github.com/GMyhf/2020fall-cs101) 提交修改。
+**注意**：题解内容来源于上游仓库，如需修改题解内容，请前往 [GMyhf/2020fall-cs101](https://github.com/GMyhf/2020fall-cs101) 或 [GMyhf/2024spring-cs201](https://github.com/GMyhf/2024spring-cs201) 提交修改。
 
 ## 题解来源
 
-题解主要来源于[GMyhf/2020fall-cs101](https://github.com/GMyhf/2020fall-cs101)，感谢所有为该项目贡献题解的同学们。
+题解主要来源于 [GMyhf/2020fall-cs101](https://github.com/GMyhf/2020fall-cs101) 和 [GMyhf/2024spring-cs201](https://github.com/GMyhf/2024spring-cs201)，感谢所有为该项目贡献题解的同学们。
 
 题目来源：
 - [cs101.openjudge.cn](http://cs101.openjudge.cn)
