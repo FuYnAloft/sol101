@@ -391,7 +391,7 @@ def generate_nav_config(answers) -> str:
     """
     nav_items = []
     for answer in answers:
-        nav_items.append(f"{{text: '{answer.fullname}', link: '/{answer.name}.md'}}")
+        nav_items.append(f"{{text: '{answer.fullname}', link: '/{answer.name}/'}}")
     return ",\n            ".join(nav_items)
 
 
@@ -418,7 +418,7 @@ def generate_index_md(answers) -> str:
     for a in answers:
         actions_lines.append(f'    - theme: {a.action_theme}')
         actions_lines.append(f'      text: {a.fullname}')
-        actions_lines.append(f'      link: /{a.name}')
+        actions_lines.append(f'      link: /{a.name}/')
     actions_content = '\n'.join(actions_lines)
 
     # Generate features content
@@ -428,7 +428,7 @@ def generate_index_md(answers) -> str:
         features_lines.append(f'      src: {a.icon}')
         features_lines.append(f'    title: {a.title}')
         features_lines.append(f'    details: {a.details}')
-        features_lines.append(f'    link: /{a.name}')
+        features_lines.append(f'    link: /{a.name}/')
     features_content = '\n'.join(features_lines)
 
     return template.replace(

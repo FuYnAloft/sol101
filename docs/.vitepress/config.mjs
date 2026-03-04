@@ -19,9 +19,9 @@ export default defineConfig({
         // https://vitepress.dev/reference/default-theme-config
         nav: [
             {text: 'Home', link: '/'},
-            {text: 'OpenJudge - 数算', link: '/oj-dsa.md'},
-            {text: 'OpenJudge - 计概', link: '/oj.md'},
-            {text: 'Codeforces', link: '/cf.md'}
+            {text: 'OpenJudge - 数算', link: '/oj-dsa/'},
+            {text: 'OpenJudge - 计概', link: '/oj/'},
+            {text: 'Codeforces', link: '/cf/'}
         ],
 
         socialLinks: [
