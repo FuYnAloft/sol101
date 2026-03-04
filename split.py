@@ -44,10 +44,11 @@ Note: Generated directories (docs/cf/, docs/oj/) are excluded from git via .giti
 import os
 import re
 import shutil
-from collections.abc import Iterable
 from pathlib import Path
 
 import mistune
+
+from config import ANSWERS, IconVariants
 
 
 def heading_to_name(heading_text: str, used_names: set = None) -> str:
@@ -425,7 +426,12 @@ def generate_index_md(answers) -> str:
     features_lines = []
     for a in answers:
         features_lines.append('  - icon:')
-        features_lines.append(f'      src: {a.icon}')
+        match a.icon:
+            case str():
+                features_lines.append(f'      src: {a.icon}')
+            case IconVariants(light=light, dark=dark):
+                features_lines.append(f'      light: {light}')
+                features_lines.append(f'      dark: {dark}')
         features_lines.append(f'    title: {a.title}')
         features_lines.append(f'    details: {a.details}')
         features_lines.append(f'    link: /{a.name}/')
@@ -498,7 +504,6 @@ def split(answers):
         sections = parse_markdown(content)
         print(f"  Found {len(sections)} sections")
 
-
         # Remove existing docs/{name}/ directory if it exists
         docs_dir = Path(f'docs/{name}')
         if docs_dir.exists():
@@ -539,5 +544,4 @@ def split(answers):
 
 
 if __name__ == "__main__":
-    from config import ANSWERS
     split(ANSWERS)
