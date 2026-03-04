@@ -8,7 +8,10 @@ hero:
   tagline: 请点击下面的按钮进入
   actions:
     - theme: brand
-      text: OpenJudge
+      text: OpenJudge - 数算
+      link: /oj-dsa
+    - theme: alt
+      text: OpenJudge - 计概
       link: /oj
     - theme: alt
       text: Codeforces
@@ -16,12 +19,17 @@ hero:
 features:
   - icon:
       src: /icon-oj.jpg
-    title: OpenJudge的题解
-    details: cs101.openjudge.cn的题解
+    title: OpenJudge 数算题解
+    details: cs101.openjudge.cn 数算部分的题解
+    link: /oj-dsa
+  - icon:
+      src: /icon-oj.jpg
+    title: OpenJudge 计概题解
+    details: cs101.openjudge.cn 计概部分的题解
     link: /oj
   - icon:
       src: /icon-cf.png
-    title: Codeforces的题解
+    title: Codeforces 题解
     details: codeforces.com的题解
     link: /cf
 ---
