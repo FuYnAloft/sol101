@@ -46,11 +46,12 @@ def main():
         url = answer.url
         ret, content = sync_github(url, rf"etag/{name}")
         if ret == 0:
+            print(f"{name} updated")
             changed += 1
             os.makedirs('original', exist_ok=True)
             with open(f'original/{name}.md', 'w', encoding='utf-8') as f:
                 f.write(content)
-
+    print(f"{changed} files updated")
     if changed:
         print('true')
     else:
