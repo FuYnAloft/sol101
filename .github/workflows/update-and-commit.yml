@@ -6,8 +6,7 @@ on:
       # 当 push 且修改了 config.py 时触发
       - 'config.py'
   schedule:
-    # 每天 00:00 UTC 运行
-    - cron: '0 0 * * *'
+    - cron: '0 20 * * *' # 北京时间凌晨 4 点
   workflow_dispatch:
     inputs:
       force_update:
@@ -70,11 +69,13 @@ jobs:
 
       - name: Commit and push changes
         if: steps.update.outputs.updated == 'true'
+        env:
+          TZ: Asia/Shanghai
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add -A
-          git diff --staged --quiet || git commit -m "Auto update: $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
+          git diff --staged --quiet || git commit -m "Auto update: $(date +'%Y-%m-%d %H:%M:%S UTC+8')"
           git push
 
       - name: Trigger build-and-deploy workflow
