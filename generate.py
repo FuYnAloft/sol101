@@ -439,13 +439,14 @@ def generate_index_md(answers) -> str:
     )
 
 
-def update_config_file(sidebar_config: str, nav_config: str):
+def update_config_file(sidebar_config: str, nav_config: str, base_config: str):
     """
     Update the config.mjs file with the generated sidebar and nav configuration.
 
     Args:
         sidebar_config: JavaScript sidebar configuration string
         nav_config: JavaScript nav items string
+        base_config: Base URL configuration string (e.g., "base: '/my-site/',")
     """
     # Read the template
     template = CONFIG_TEMPLATE
@@ -457,6 +458,9 @@ def update_config_file(sidebar_config: str, nav_config: str):
     ).replace(
         '// template: nav',
         nav_config
+    ).replace(
+        '// template: base',
+        base_config
     )
 
     # Write to the actual config file
@@ -525,7 +529,9 @@ def generate(answers):
         print("Generating sidebar configuration...")
         sidebar_config = generate_sidebar_config(all_structures)
         nav_config = generate_nav_config(answers_list)
-        update_config_file(sidebar_config, nav_config)
+        base = os.getenv('SITE_BASE', '/')
+        base_config = f"base: '{base}',"
+        update_config_file(sidebar_config, nav_config, base_config)
         print("Updated docs/.vitepress/config.mjs")
 
     # Generate docs/index.md

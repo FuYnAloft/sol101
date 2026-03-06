@@ -23,6 +23,7 @@ jobs:
       build: ${{ steps.check.outputs.build }}
     env:
       NODE_OPTIONS: --max-old-space-size=8192
+      SITE_BASE: /sol101/
 
     steps:
       - name: Checkout repository

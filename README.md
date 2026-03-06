@@ -31,6 +31,7 @@
 3. 运行更新和生成脚本：
    ```bash
    uv run update.py
+   # export SITE_BASE="/sol101/" # 设置站点基路径，本地构建通常不需要设置
    uv run generate.py
    ```
 

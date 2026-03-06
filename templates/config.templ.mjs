@@ -4,7 +4,7 @@ import mark from 'markdown-it-mark'
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
     ignoreDeadLinks: true,
-    base: '/sol101/',
+    // template: base
     lang: "zh-CN",
     title: "Solutions CS101",
     description: "OJ 和 CF 的题解",
