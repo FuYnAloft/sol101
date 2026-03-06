@@ -1,0 +1,95 @@
+name: 更新、构建与部署
+on:
+  push:
+    paths:
+      - 'docs/**'
+      - 'templates/**'
+      - '**.py'
+      - '.github/workflows/update-and-build.yml'
+  schedule:
+    - cron: '0 20 * * *'
+  workflow_dispatch:
+    inputs:
+      force_build:
+        description: '强制进行构建部署'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  update-generate-build:
+    runs-on: ubuntu-latest
+    outputs:
+      build: ${{ steps.check.outputs.build }}
+
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Uv sync
+        run: uv sync --no-dev
+
+      - name: Run update.py and check result
+        id: update
+        run: |
+          output=$(python update.py)
+          echo "$output"
+          last_line=$(echo "$output" | tail -n 1)
+          echo "updated=$last_line" >> $GITHUB_OUTPUT
+
+      - name: Check if build is necessary
+        id: check
+        run: |
+          if [[ "${{ github.event_name }}" == "push" ||"${{ steps.update.outputs.updated }}" == "true" || "${{ inputs.force_build }}" == "true" ]]; then
+              echo "build=true" >> $GITHUB_OUTPUT
+          else
+              echo "build=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Run split.py
+        if: steps.check.outputs.build == 'true'
+        run: python split.py
+
+      - name: Set up Node.js
+        if: steps.check.outputs.build == 'true'
+        uses: actions/setup-node@v4
+        with:
+            node-version: '20'
+            cache: 'npm'
+
+      - name: Install dependencies
+        if: steps.check.outputs.build == 'true'
+        run: npm ci
+
+      - name: Build VitePress site
+        if: steps.check.outputs.build == 'true'
+        run: npm run docs:build
+
+      - name: Upload artifact
+        if: steps.check.outputs.build == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/.vitepress/dist
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: update-generate-build
+    if: needs.update-generate-build.outputs.build == 'true'
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+
+
+

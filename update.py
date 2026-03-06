@@ -70,4 +70,7 @@ def update(answers: Iterable[Answer]) -> bool:
 
 
 if __name__ == "__main__":
-    update(ANSWERS)
+    if update(ANSWERS):
+        print('true')
+    else:
+        print('false')
