@@ -9,8 +9,8 @@ Workflow:
 2. cutter.cut() reads from original/{name}.md and splits into individual files
 
 Usage:
-    import cutter
-    cutter.cut({'cf', 'oj'})  # Process original/cf.md and original/oj.md files
+    from generate import generate
+    generate({'cf', 'oj'})  # Process original/cf.md and original/oj.md files
 
 Features:
 - Splits markdown files by level 1 (#) and level 2 (##) headings based on section length
@@ -48,7 +48,7 @@ from pathlib import Path
 
 import mistune
 
-from config import ANSWERS, IconVariants
+from config import ANSWERS, IconVariants, INDEX_TEMPLATE, CONFIG_TEMPLATE
 
 
 def heading_to_name(heading_text: str, used_names: set = None) -> str:
@@ -407,12 +407,7 @@ def generate_index_md(answers) -> str:
         Markdown frontmatter string for index.md
     """
     # Read the template
-    template_path = 'index.templ.md'
-    if not os.path.exists(template_path):
-        raise FileNotFoundError(f"{template_path} not found. This template is required to generate docs/index.md.")
-
-    with open(template_path, 'r', encoding='utf-8') as f:
-        template = f.read()
+    template = INDEX_TEMPLATE
 
     # Generate actions content
     actions_lines = []
@@ -453,8 +448,7 @@ def update_config_file(sidebar_config: str, nav_config: str):
         nav_config: JavaScript nav items string
     """
     # Read the template
-    with open('config.templ.mjs', 'r', encoding='utf-8') as f:
-        template = f.read()
+    template = CONFIG_TEMPLATE
 
     # Replace the placeholders
     updated_config = template.replace(
@@ -466,11 +460,12 @@ def update_config_file(sidebar_config: str, nav_config: str):
     )
 
     # Write to the actual config file
+    os.makedirs('docs/.vitepress', exist_ok=True)
     with open('docs/.vitepress/config.mjs', 'w', encoding='utf-8') as f:
         f.write(updated_config)
 
 
-def split(answers):
+def generate(answers):
     """
     Main function to cut markdown files into smaller pieces.
     
@@ -544,4 +539,4 @@ def split(answers):
 
 
 if __name__ == "__main__":
-    split(ANSWERS)
+    generate(ANSWERS)

@@ -87,3 +87,8 @@ ANSWERS = [
         welcome="欢迎来到 Sunnywhy 题解，点击左边目录选择题目。",
     ),
 ]
+with open('templates/config.templ.mjs') as f:
+    CONFIG_TEMPLATE = f.read()
+
+with open('templates/index.templ.md') as f:
+    INDEX_TEMPLATE = f.read()
