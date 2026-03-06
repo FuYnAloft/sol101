@@ -38,7 +38,7 @@ jobs:
       - name: Run update.py and check result
         id: update
         run: |
-          output=$(python update.py)
+          output=$(uv run update.py)
           echo "$output"
           last_line=$(echo "$output" | tail -n 1)
           echo "updated=$last_line" >> $GITHUB_OUTPUT
@@ -52,9 +52,9 @@ jobs:
               echo "build=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Run split.py
+      - name: Run generate.py
         if: steps.check.outputs.build == 'true'
-        run: python split.py
+        run: uv run generate.py
 
       - name: Set up Node.js
         if: steps.check.outputs.build == 'true'
