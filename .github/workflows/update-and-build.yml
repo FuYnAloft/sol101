@@ -85,6 +85,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: update-generate-build
     if: needs.update-generate-build.outputs.build == 'true'
+    permissions:
+      pages: write
+      id-token: write
 
     steps:
       - name: Deploy to GitHub Pages
