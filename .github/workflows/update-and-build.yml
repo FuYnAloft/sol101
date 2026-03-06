@@ -28,6 +28,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Restore/Save ETags Cache
+        uses: actions/cache@v4
+        with:
+          # 存放 etag 文件的目录
+          path: etag
+          # 1. 使用包含 run_id 或时间戳的唯一 Key，确保每次运行结束后都能“存入”新内容
+          key: etags-${{ github.run_id }}
+          # 2. 核心：通过 restore-keys 匹配最近一次存入的缓存
+          restore-keys: |
+            etags-
+
       - name: Install uv
         uses: astral-sh/setup-uv@v5
         with:
