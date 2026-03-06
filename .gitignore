@@ -8,3 +8,8 @@ docs/.vitepress/dist/
 docs/.vitepress/cache/
 
 original/
+
+docs/
+!docs/public
+
+etag/
