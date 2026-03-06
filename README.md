@@ -11,9 +11,8 @@
 ### 环境要求
 
 - Node.js 20 或更高版本
-- npm (通常随 Node.js 一起安装)
-- Python 3.x (可选，用于运行更新和拆分脚本)
-- pip, venv (通常随 Python 一起安装)
+- npm
+- uv
 
 ### 构建步骤
 
@@ -23,29 +22,21 @@
    cd sol101
    ```
 
-2. （可选）创建虚拟环境并安装 Python 依赖 ：
+2. 安装依赖
    ```bash
-   python -m venv # 创建虚拟环境
-   # 激活虚拟环境
-   source venv/bin/activate  # Linux/Mac
-   venv\Scripts\activate     # Windows
-   pip install -r requirements.txt # 安装依赖
-   ```
-
-3. （可选）运行更新和拆分脚本：
-   ```bash
-   # 确保激活虚拟环境后运行
-   python update.py
-   python split.py
-   ```
-
-4. 安装 Node.js 依赖：
-   ```bash
+   uv sync --no-dev 
    npm ci
    ```
 
-5. 构建 VitePress 网站：
+3. 运行更新和生成脚本：
    ```bash
+   uv run update.py
+   uv run generate.py
+   ```
+
+4. 构建 VitePress 网站：
+   ```bash
+   export NODE_OPTIONS=--max-old-space-size=8196 # 增加 Node.js 内存限制，以免 OOM
    npm run docs:build
    ```
 
