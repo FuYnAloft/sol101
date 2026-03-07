@@ -9,7 +9,7 @@ docs/.vitepress/cache/
 
 original/
 
-docs/
-!docs/public
+docs/*
+!docs/public/
 
 etag/

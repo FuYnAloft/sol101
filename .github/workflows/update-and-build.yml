@@ -2,7 +2,7 @@ name: 更新、构建与部署
 on:
   push:
     paths:
-      - 'docs/**'
+      - 'docs/public/**'
       - 'templates/**'
       - '**.py'
       - '.github/workflows/update-and-build.yml'
