@@ -7,7 +7,8 @@ export default defineConfig({
     // template: base
     lang: "zh-CN",
     title: "Solutions CS101",
-    description: "OJ 和 CF 的题解",
+    description: "一些题解",
+    head: [['meta', {name: 'referrer', content: 'no-referrer'}]],
     markdown: {
         math: true,
         vue: false,
