@@ -86,6 +86,16 @@ ANSWERS = [
         action_theme="alt",
         welcome="欢迎来到 Sunnywhy 题解，点击左边目录选择题目。",
     ),
+    Answer(
+        name="cpp",
+        url="https://raw.githubusercontent.com/GMyhf/2025fall-cs201/refs/heads/main/2025fall_problems_in_cpp.md",
+        fullname="C++",
+        title="C++版题解",
+        details="数算和计概的C++版题解",
+        icon="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg",
+        action_theme="alt",
+        welcome="欢迎来到C++版题解，点击左边目录选择题目。",
+    ),
 ]
 with open('templates/config.templ.mjs') as f:
     CONFIG_TEMPLATE = f.read()
